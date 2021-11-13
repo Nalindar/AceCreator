@@ -13,6 +13,7 @@ namespace AceCreator
         public static Collection<Regex> MyLocations = new Collection<Regex>();
         public static Collection<Regex> MyLandblock = new Collection<Regex>();
         public static Collection<Regex> ParentGUID = new Collection<Regex>();
+        public static Collection<Regex> ObjGeneratorRadius = new Collection<Regex>();
 
         public ChatMessages()
         {
@@ -22,8 +23,21 @@ namespace AceCreator
             MyLocations.Add(new Regex("^Your location is:.*"));
             MyLandblock.Add(new Regex("^CurrentLandblock:.*"));
             ParentGUID.Add(new Regex("^GUID:.*"));
+            ObjGeneratorRadius.Add(new Regex(".*GeneratorRadius.*"));
         }
 
+        public static bool GetObjectRadiusString(string text)
+        {
+            foreach (Regex regex in ObjGeneratorRadius)
+            {
+                if (regex.IsMatch(text))
+                {
+                    Globals.GeneratorRadiusString = text;
+                    return true;
+                }
+            }
+            return false;
+        }
 
         public static bool GetWeenieInfo(string text, out string wcid, out string guid)
         {

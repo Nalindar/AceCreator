@@ -35,6 +35,7 @@ namespace AceCreator
         public static string PathRecipeSQL;
 
         public static string YotesWCID;
+        public static string GeneratorRadiusString;
         public static string ButtonCommand;
     }
 }

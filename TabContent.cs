@@ -269,41 +269,30 @@ namespace AceCreator
         {
             try
             {
-                double genRadius = 0.0;
-                /*                if (genRadius == 0.0)
-                                    Util.WriteToChat("No Generator Radius Found");
-                                else
-                                    DrawRadius(genRadius);*/
-
-                DrawRadius(genRadius);
-            }
-            catch (Exception ex) { Util.LogError(ex); }
-
-        }
-
-        public void DrawRadius(double genRadius)
-        {
-            Util.SendChatCommand("/getproperty PropertyFloat.GeneratorRadius");
-            WO = CoreManager.Current.WorldFilter[CoreManager.Current.Actions.CurrentSelection];
-            Globals.Host.Actions.RequestId(Globals.Host.Actions.CurrentSelection);
-            CoreManager.Current.WorldFilter.ChangeObject += GetInfoWaitForItemUpdate;
-            CoreManager.Current.D3DService.MarkObjectWithShape(WO.Id, D3DShape.Ring, Color.Red.ToArgb());
-        }
-
-        }
-/*        public static double GetGeneratorRadius()
-        {
-            try
-            {
                 Util.SendChatCommand("/getproperty PropertyFloat.GeneratorRadius");
-                
-                if (genRadius == 0.0)
-                    return 0.0;
+
+                string radiusString = Globals.GeneratorRadiusString;
+                string checkString = radiusString.Substring(radiusString.LastIndexOf("=") + 1);
+                double radius = 0;
+
+                if (checkString.Trim().Length != 0)
+                {
+                    radius = Convert.ToDouble(checkString.Trim());
+                    Util.WriteToChat("Radius:" + radius.ToString());
+                }
                 else
-                    return genRadius;
+                    Util.WriteToChat("Generator radius not defined");
+
+                WO = CoreManager.Current.WorldFilter[CoreManager.Current.Actions.CurrentSelection];
+                Globals.Host.Actions.RequestId(Globals.Host.Actions.CurrentSelection);
+                CoreManager.Current.WorldFilter.ChangeObject += WaitForItemUpdate;
+                CoreManager.Current.D3DService.MarkObjectWithShape(WO.Id, D3DShape.Ring, Color.Red.ToArgb());
+
             }
-            catch (Exception ex) { Util.LogError(ex); }
-            return 0.0;
-        }*/
+            catch (Exception ex) { Util.WriteToChat(ex.ToString()); }
+        }
+
+
+    }
 
     }

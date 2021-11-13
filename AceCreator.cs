@@ -426,6 +426,10 @@ namespace AceCreator
         {
             try
             {
+                if (ChatMessages.GetObjectRadiusString(e.Text))
+                {
+                    Globals.GeneratorRadiusString = e.Text;
+                }
                 if (ChatMessages.GetWeenieInfo(e.Text, out string wcid, out string guid))
                 {
                     TextboxExportJsonWCID = (HudTextBox)view["TextboxExportJsonWCID"];
