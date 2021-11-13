@@ -140,7 +140,7 @@ namespace AceCreator
             LabelGetInfo = (HudStaticText)view["LabelGetInfo"]; 
 
             ButtonRemoveInstace = view != null ? (HudButton)view["ButtonRemoveInstace"] : new HudButton();
-            ButtonRemoveInstace.Hit += new EventHandler(ButtonRemoveInstace_Click);
+            ButtonRemoveInstace.Hit += new EventHandler(ButtonRemoveInstance_Click);
 
             ButtonMyLocation = view != null ? (HudButton)view["ButtonMyLocation"] : new HudButton();
             ButtonMyLocation.Hit += new EventHandler(ButtonMyLocation_Click);
@@ -153,6 +153,9 @@ namespace AceCreator
 
             ButtonGetInfo = view != null ? (HudButton)view["ButtonGetInfo"] : new HudButton();
             ButtonGetInfo.Hit += new EventHandler(ButtonGetInfo_Click);
+
+            ButtonDrawGeneratorRadius = view != null ? (HudButton)view["ButtonDrawGeneratorRadius"] : new HudButton();
+            ButtonDrawGeneratorRadius.Hit += new EventHandler(ButtonDrawGeneratorRadius_Click);
 
             // ***** Nudge Tab *****
             ButtonNudgeN = view != null ? (HudButton)view["ButtonNudgeN"] : new HudButton();
@@ -325,7 +328,7 @@ namespace AceCreator
             ButtonCreateMob.Hit += new EventHandler(ButtonCreateMob_Click);
             
             ButtonAdvancedRemoveInst = view != null ? (HudButton)view["ButtonAdvancedRemoveInst"] : new HudButton();
-            ButtonAdvancedRemoveInst.Hit += new EventHandler(ButtonRemoveInstace_Click);
+            ButtonAdvancedRemoveInst.Hit += new EventHandler(ButtonRemoveInstance_Click);
 
             ButtonAdvancedAddEncounter = view != null ? (HudButton)view["ButtonAdvancedAddEncounter"] : new HudButton();
             ButtonAdvancedAddEncounter.Hit += new EventHandler(ButtonAdvancedAddEncounter_Click);
@@ -423,7 +426,6 @@ namespace AceCreator
         {
             try
             {
-
                 if (ChatMessages.GetWeenieInfo(e.Text, out string wcid, out string guid))
                 {
                     TextboxExportJsonWCID = (HudTextBox)view["TextboxExportJsonWCID"];

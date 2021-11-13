@@ -23,6 +23,8 @@ namespace AceCreator
             MyLandblock.Add(new Regex("^CurrentLandblock:.*"));
             ParentGUID.Add(new Regex("^GUID:.*"));
         }
+
+
         public static bool GetWeenieInfo(string text, out string wcid, out string guid)
         {
             foreach (Regex regex in WeenieGetInfo)
@@ -42,6 +44,7 @@ namespace AceCreator
             guid = "False";
             return false;
         }
+
 
         public static bool LogMyLocations(string text, out string location)
         {

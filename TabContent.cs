@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Text.RegularExpressions;
@@ -43,6 +44,9 @@ namespace AceCreator
         public HudButton ButtonDeleteItem { get; set; }
         public HudButton CommandRefreshFilesList { get; set; }
         public HudButton ButtonGetInfo { get; set; }
+        public HudButton ButtonDrawGeneratorRadius { get; set; }
+        
+
 
         // ComboBox Change Events
         public void ChoiceJSON_Change(object sender, EventArgs e)
@@ -200,7 +204,7 @@ namespace AceCreator
 
         }
 
-        public void ButtonRemoveInstace_Click(object sender, EventArgs e)
+        public void ButtonRemoveInstance_Click(object sender, EventArgs e)
         {
 
             try
@@ -261,5 +265,45 @@ namespace AceCreator
 
         }
 
+        public void ButtonDrawGeneratorRadius_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                double genRadius = 0.0;
+                /*                if (genRadius == 0.0)
+                                    Util.WriteToChat("No Generator Radius Found");
+                                else
+                                    DrawRadius(genRadius);*/
+
+                DrawRadius(genRadius);
+            }
+            catch (Exception ex) { Util.LogError(ex); }
+
+        }
+
+        public void DrawRadius(double genRadius)
+        {
+            Util.SendChatCommand("/getproperty PropertyFloat.GeneratorRadius");
+            WO = CoreManager.Current.WorldFilter[CoreManager.Current.Actions.CurrentSelection];
+            Globals.Host.Actions.RequestId(Globals.Host.Actions.CurrentSelection);
+            CoreManager.Current.WorldFilter.ChangeObject += GetInfoWaitForItemUpdate;
+            CoreManager.Current.D3DService.MarkObjectWithShape(WO.Id, D3DShape.Ring, Color.Red.ToArgb());
+        }
+
+        }
+/*        public static double GetGeneratorRadius()
+        {
+            try
+            {
+                Util.SendChatCommand("/getproperty PropertyFloat.GeneratorRadius");
+                
+                if (genRadius == 0.0)
+                    return 0.0;
+                else
+                    return genRadius;
+            }
+            catch (Exception ex) { Util.LogError(ex); }
+            return 0.0;
+        }*/
+
     }
-}
